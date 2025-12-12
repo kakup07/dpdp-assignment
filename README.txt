@@ -37,7 +37,7 @@ Install dependencies:
 
 Initialize the database:
 
-  flask init_db
+  flask init-db
 
 Run the flask server:
 
