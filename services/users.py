@@ -3,15 +3,16 @@ import bcrypt
 import os
 from werkzeug.utils import secure_filename
 from flask import current_app
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
+def verify_password(stored_hash, password_attempt):
+  return check_password_hash(stored_hash, password_attempt)
 
 def validate_password(password):
   # can add more validations
   if(len(password) > 8):
     return True
   return False
-
 
 def register_user(user):
   retval = {'status': False, 'data': ''}
@@ -33,7 +34,6 @@ def register_user(user):
     retval['data'] = 'Failure'
   return retval
     
-
 def login_user(user):
   retval = {'status': False, 'data': ''}
   try:
@@ -43,9 +43,9 @@ def login_user(user):
       is_valid = False
       user_details = validate_and_get_user(user['email'])
       if(user_details):
-        is_valid = bcrypt.checkpw(
-          user['password'].encode('utf-8'), 
-          user_details['password'].encode('utf-8')
+        is_valid = verify_password( 
+          user_details['password'],
+          user['password']
         )
       if(is_valid):
           retval['user_id'] = user_details['id']
@@ -77,7 +77,7 @@ def verify_user_profile(user):
 def update_user_profile(user_id, name, email, password, company_name, resume):
   # hash password if provided
   if password.strip():
-    password = hash_password(password)
+    password = generate_password_hash(password)
   else:
     password = None  # means "don’t change"
 

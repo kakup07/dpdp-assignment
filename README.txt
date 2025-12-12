@@ -60,3 +60,5 @@ You should create a .env file in the project root with:
   SECRET_KEY=your-secret-key-here
 
 A file named .env.example may be provided to show required variables.
+
+admin user_name -> 'admin' password -> 'admin123'
