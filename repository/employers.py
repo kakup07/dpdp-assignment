@@ -3,7 +3,7 @@ from db import get_db, query_db
 def get_all_employers():
   return query_db(
     '''
-    select id, name, email, account_status, created_at
+    select id, name, email, account_status status, created_at
     from users
     where user_type = 'employer'
     order by created_at desc

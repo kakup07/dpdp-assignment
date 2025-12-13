@@ -4,11 +4,11 @@
 
 {% block content %}
 <div class="container d-flex justify-content-center mt-5">
-  <div class="card shadow-sm p-4" style="width: 380px;">
+  <div class="col-12 col-md-6 col-lg-5 d-flex card shadow-sm p-4">
     
     <h3 class="text-center mb-4">Login</h3>
 
-    <form action="{{ url_for('users.login') }}" method="POST">
+    <form class="align-items-center" action="{{ url_for('users.login') }}" method="POST">
 
       <!-- Email -->
       <div class="mb-3">

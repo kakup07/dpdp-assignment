@@ -45,17 +45,21 @@ def apply_new_job(job_id):
     job = get_job_by_id(job_id)
     return render_template('apply_job.html', job=job)
   
-  cover_letter = request.form.get('cover_letter', None)
-  result =  apply_job({
-    'job_id': job_id, 
-    'user_id': user_id,
-    'cover_letter' : cover_letter
-    })
-  if(result['status']):
-    flash('Applied successfully.')
-    return redirect(url_for('main.home'))
+  profile_check = verify_user_profile({'user_id': session.get('user_id'), 'user_type': role})
+  if not profile_check['status']:
+    flash(profile_check['msg'])
   else:
-    flash(result['data'])
-    return redirect(url_for('jobs.apply_new_job', job_id=job_id))
+    cover_letter = request.form.get('cover_letter', None)
+    result =  apply_job({
+      'job_id': job_id, 
+      'user_id': user_id,
+      'cover_letter' : cover_letter
+      })
+    if(result['status']):
+      flash('Applied successfully.')
+      return redirect(url_for('main.home'))
+    else:
+      flash(result['data'])
+  return redirect(url_for('jobs.apply_new_job', job_id=job_id))
 
   

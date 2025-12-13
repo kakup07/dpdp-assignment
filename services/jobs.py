@@ -2,7 +2,6 @@ from repository import create_job, get_job_details, get_job_responses, create_re
 import json
 
 def add_job(job):
-  print(job)
   retval = {'status': False, 'data': ''}
   try:
     if not job['title'] or not job['description']:
