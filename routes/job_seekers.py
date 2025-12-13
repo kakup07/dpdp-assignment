@@ -23,7 +23,6 @@ def new_job():
 def job_applied():
   user_id = session.get('user_id')
   job_status = request.args.get('status', 'applied')
-  print('-=-=-=',user_id, job_status)
   jobs = get_applied_jobs({
     'user_id': user_id,
     'job_status': job_status

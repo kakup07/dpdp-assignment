@@ -26,6 +26,7 @@
       </a>
   </div>
   {% if jobs %}
+  <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -53,7 +54,7 @@
             {% endfor %}
         </tbody>
     </table>
-
+  </div>
     {% else %}
     <p class="text-muted">You haven’t posted any jobs yet. Use the sidebar to add a new job.</p>
   {% endif %}

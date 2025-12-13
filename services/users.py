@@ -69,7 +69,7 @@ def verify_user_profile(user):
         retval['status'] = False
         retval['msg'] = 'Please update company name in profile'
     else:
-      if not user['file_name']:
+      if not user_details['file_path']:
         retval['status'] = False
         retval['msg'] = 'Please update resume in profile'
   return retval
@@ -82,12 +82,12 @@ def update_user_profile(user_id, name, email, password, company_name, resume):
     password = None  # means "don’t change"
 
   # save resume if provided
-  resume_file_path = None
+  resume_file_path, filename = None, None
   if resume and resume.filename:
     filename = secure_filename(resume.filename)
     save_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
     resume.save(save_path)
-    resume_file_path = filename
+    resume_file_path = save_path
   update_user(
-    user_id, name, email, password, company_name, resume_file_path
+    user_id, name, email, password, company_name, resume_file_path, filename
   )

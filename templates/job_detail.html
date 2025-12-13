@@ -33,6 +33,7 @@
     <h4 class='mb-3'>Applicants ({{ responses | length }})</h4>
 
     {% if responses %}
+    <div class="table-responsive">
         <table class='table table-striped'>
             <thead>
                 <tr>
@@ -51,11 +52,10 @@
                     <td>{{ r['name'] }}</td>
                     <td>{{ r['email'] }}</td>
                     <td>{{ r['status'] }}</td>
-
                     <td>
                         {% if r['file_path'] %}
-                          <a href='{{ url_for("uploaded_files", filename=r["file_path"]) }}' target='_blank'>
-                            {{ r['file_path'] }}
+                          <a href='{{ url_for("uploaded_files", filename=r["file_name"]) }}' target='_blank'>
+                            {{ r['file_name'] }}
                           </a>
                         {% else %}
                           <span class='text-muted'>No file</span>
@@ -91,7 +91,7 @@
             {% endfor %}
             </tbody>
         </table>
-
+  </div>
     {% else %}
         <p class='text-muted'>No applicants have applied for this job yet.</p>
     {% endif %}

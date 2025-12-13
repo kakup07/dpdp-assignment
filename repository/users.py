@@ -43,12 +43,12 @@ def validate_email(email):
 
 def get_user_profile(user_id):
   return query_db('''
-    select file_name, company_name, account_status from users where id = ? ''',
+    select file_path, company_name, account_status from users where id = ? ''',
     (user_id,),
     True
   )
 
-def update_user(user_id, name, email, password, company_name, resume):
+def update_user(user_id, name, email, password, company_name, file_path, file_name):
   fields = []
   values = []
 
@@ -66,10 +66,12 @@ def update_user(user_id, name, email, password, company_name, resume):
       fields.append("company_name = ?")
       values.append(company_name)
 
-  if resume:
+  if file_name and file_path:
       fields.append("file_path = ?")
-      values.append(resume)
-
+      values.append(file_path)
+      fields.append("file_name = ?")
+      values.append(file_name)
+  
   values.append(user_id)
   db = get_db()
   db.execute(

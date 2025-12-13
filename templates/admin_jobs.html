@@ -18,7 +18,7 @@
         <span class='label ms-3'>Manage Employers</span>
     </a>
 
-    <a class='nav-link text-white d-flex align-items-center' href='/admin/jobseekers'>
+    <a class='nav-link text-white d-flex align-items-center' href='/admin/job_seekers'>
         <i class='bi bi-person-badge fs-4'></i>
         <span class='label ms-3'>Manage Jobseekers</span>
     </a>
@@ -27,7 +27,7 @@
 {% block content %}
 <div class="container">
     <h2 class="mb-4">Manage Jobs</h2>
-
+    <div class="table-responsive">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -57,7 +57,7 @@
 
                 <td>
                     <a href="/admin/jobs/{{ job['id'] }}/toggle"
-                       class="btn btn-sm btn-warning">{{'Activate' if job['status'] == 'inactive' else 'Deactivate'}}</a>
+                       class="btn btn-sm btn-warning">{{'✓' if job['status'] == 'inactive' else '✗'}}</a>
 
                     <a href="/admin/jobs/{{ job['id'] }}/delete"
                        class="btn btn-sm btn-danger"
@@ -67,5 +67,6 @@
             {% endfor %}
         </tbody>
     </table>
+    </div>
 </div>
 {% endblock %}

@@ -54,7 +54,7 @@ def admin_toggle_employer_route(user_id):
   flash('Employer status updated')
   return redirect('/admin/employers')
 
-@admin_bp.route('/jobseekers')
+@admin_bp.route('/job_seekers')
 def admin_jobseekers():
   seekers = admin_list_jobseekers()
   return render_template('admin_jobseekers.html', seekers=seekers)

@@ -80,4 +80,4 @@ def update_profile():
   )
 
   flash("Profile updated successfully.")
-  return redirect(url_for('main.edit_profile'))
+  return redirect(url_for('users.edit_profile'))
